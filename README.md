@@ -41,7 +41,7 @@ It goes on with the steps, an example it ran against the real code, and the limi
 
 [![A one-sheet diagram of the rate limiter: the flow of one request, a worked example, and the values that matter](examples/token-bucket/diagram.png)](examples/token-bucket/diagram.svg)
 
-One SVG file. The numbers in the example panel come from running the code, not from guessing. About three and a half minutes.
+One SVG file. The numbers in the example panel come from running the code, not from guessing. It took about three and a half minutes.
 
 ### Page
 
@@ -51,7 +51,7 @@ One SVG file. The numbers in the example panel come from running the code, not f
 
 [![The "Try it" part of the page: three sliders, and a chart of the bucket draining](examples/token-bucket/page.png)](examples/token-bucket/page.html)
 
-One HTML file with nothing to install. [Download it](examples/token-bucket/page.html), open it, and drag the sliders. Before it handed the page over, the agent ran the page's little simulation against the real Python on all 32,000 slider settings and got the same answer every time. Five minutes.
+One HTML file with nothing to install. [Download it](examples/token-bucket/page.html), open it, and drag the sliders. Before it handed the page over, the agent ran the page's little simulation against the real Python on all 32,000 slider settings and got the same answer every time. It took five minutes.
 
 ### Video
 
@@ -61,7 +61,7 @@ One HTML file with nothing to install. [Download it](examples/token-bucket/page.
 
 ![The explainer video as a silent preview, with its subtitles drawn in](examples/token-bucket/video.gif)
 
-That is a silent preview. [The real one](examples/token-bucket/video.mp4) is 81 seconds long and has a voice. Ten minutes.
+That is a silent preview. [The real one](examples/token-bucket/video.mp4) is 81 seconds long and has a voice. It took ten minutes to make.
 
 ## Install
 

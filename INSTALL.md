@@ -31,7 +31,8 @@ Or, inside a session:
 Then type `/demystify` followed by what you want explained, or just ask for an explainer in your own words.
 
 ```bash
-claude plugin update demystify@demystify        # update
+claude plugin marketplace update demystify      # update
+claude plugin update demystify@demystify
 claude plugin uninstall demystify@demystify     # remove
 claude plugin marketplace remove demystify
 ```
@@ -63,7 +64,7 @@ codex plugin marketplace remove demystify
 gemini extensions install https://github.com/C0ldSmi1e/demystify
 ```
 
-Then type `/demystify` followed by your request, or just ask. Check that it loaded with `gemini skills list`.
+Gemini CLI shows what the extension contains and asks you to confirm. Then type `/demystify` followed by your request, or just ask. Check that it loaded with `gemini extensions list`.
 
 ```bash
 gemini extensions update demystify              # update

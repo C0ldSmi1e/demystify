@@ -131,6 +131,14 @@ class WithBrowser(unittest.TestCase):
         self.assertEqual(rules(report["errors"]),
                          ["missing-reference", "text-outside-canvas", "text-overflows-box", "text-overlap"])
 
+    def test_a_long_label_is_found_when_its_centre_is_outside_its_box(self):
+        # In a wide font the centre of this label is past the right edge of the box that it starts in.
+        wide = ('<rect x="20" y="200" width="160" height="60" fill="#e8f0fe" stroke="#1a56db"/>'
+                '<text x="30" y="236" font-family="monospace" font-size="20">A label that is far too long for this box</text></svg>')
+        code, report = self.run_look("wide.svg", GOOD_SVG.replace("</svg>", wide))
+        self.assertEqual(code, 1)
+        self.assertEqual(rules(report["errors"]), ["text-overflows-box"])
+
     def test_shapes_that_vanish_are_errors(self):
         lost = ('<path d="M680540l4 4l8 -9" stroke="#000" fill="none"/>'
                 '<rect x="5000" y="40" width="50" height="50" fill="red"/></svg>')

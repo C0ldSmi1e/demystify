@@ -179,9 +179,14 @@ AUDIT_JS = r"""
       var view = svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.width ? svg.viewBox.baseVal.width : 0;
       var shownSize = view ? size * canvas.w / view : size;
       if (shownSize < 11.5) add(R.warnings, 'tiny-text', '"' + words(x.el) + '" in ' + which + ' is ' + shownSize.toFixed(1) + ' px: text in a picture is 12 px or larger', 5);
-      var cx = (b.l + b.r) / 2, cy = (b.t + b.b) / 2, home = null;
-      rects.forEach(function (q) {
-        if (cx >= q.l && cx <= q.r && cy >= q.t && cy <= q.b && (!home || area(q) < area(home))) home = q;
+      // The box of a text is the smallest box that contains its centre. A long text can have its centre
+      // outside the box that it starts in, so if no box contains the centre, look at the two ends.
+      var cy = (b.t + b.b) / 2, home = null;
+      [(b.l + b.r) / 2, b.l + 2, b.r - 2].forEach(function (px) {
+        if (home) return;
+        rects.forEach(function (q) {
+          if (px >= q.l && px <= q.r && cy >= q.t && cy <= q.b && (!home || area(q) < area(home))) home = q;
+        });
       });
       if (home && (b.l < home.l - 1.5 || b.r > home.r + 1.5 || b.t < home.t - 1.5 || b.b > home.b + 1.5)) {
         var over = Math.max(home.l - b.l, b.r - home.r, home.t - b.t, b.b - home.b);

@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800" role="img" aria-labelledby="sheet-title"
+     font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#1c2430">
+  <title id="sheet-title">By default, the bucket lets a burst of up to 20 requests pass, then holds the rate at 5 requests each second</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1c2430"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#b42318"/>
+    </marker>
+    <style>
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+      .h1 { font-size: 24px; font-weight: 700; }
+      .h2 { font-size: 16px; font-weight: 600; }
+      .b { font-weight: 600; }
+      .note { font-size: 12px; fill: #5f6b7a; }
+      .cap { font-size: 12px; fill: #5f6b7a; }
+      .blue { fill: #1d4ed8; }
+      .red { fill: #b42318; }
+      .white { fill: #ffffff; }
+      .mid { text-anchor: middle; }
+      .end { text-anchor: end; }
+      .paper { fill: #ffffff; }
+      .frame { fill: none; stroke: #1c2430; stroke-width: 1.2; }
+      .panel { fill: #ffffff; stroke: #c5ccd6; stroke-width: 1; }
+      .badge { fill: #1c2430; }
+      .box { fill: #ffffff; stroke: #1c2430; stroke-width: 1.2; }
+      .box-blue { fill: #eef3fb; stroke: #1d4ed8; stroke-width: 1.2; }
+      .box-red { fill: #fdf0ee; stroke: #b42318; stroke-width: 1.2; }
+      .area { fill: #f3f5f8; stroke: #c5ccd6; stroke-width: 1; }
+      .band { fill: #f3f5f8; }
+      .track { fill: #eef1f5; }
+      .bar { fill: #cfe0fb; stroke: #1d4ed8; stroke-width: 1; }
+      .bar-grey { fill: #c5ccd6; stroke: #5f6b7a; stroke-width: 1; }
+      .rule { fill: none; stroke: #c5ccd6; stroke-width: 1; }
+      .line { fill: none; stroke: #1c2430; stroke-width: 1.4; }
+      .line-blue { fill: none; stroke: #1d4ed8; stroke-width: 1.4; }
+      .line-red { fill: none; stroke: #b42318; stroke-width: 1.4; }
+      .mark-blue { fill: none; stroke: #1d4ed8; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .mark-red { fill: none; stroke: #b42318; stroke-width: 2; stroke-linecap: round; }
+      .dot { fill: #ffffff; stroke: #1c2430; stroke-width: 1.4; }
+    </style>
+  </defs>
+
+  <rect class="paper" width="1600" height="800"/>
+  <rect class="frame" x="24" y="24" width="1552" height="752"/>
+  <text class="h1" x="48" y="68">By default, the bucket lets a burst of up to 20 requests pass, then holds the rate at 5 requests each second</text>
+  <text class="note" x="48" y="92">How examples/token_bucket.py limits requests: the class TokenBucket and the function handle()</text>
+  <path class="line" d="M24 104H1576"/>
+  <path class="rule" d="M24 744H1576"/>
+  <text class="note" x="48" y="764">Source: examples/token_bucket.py</text>
+  <text class="note mid" x="800" y="764">2026-10-02</text>
+  <text class="note end" x="1552" y="764">Not verified: the behaviour with threads and with the real clock. The tests used a fake clock.</text>
+
+  <!-- Panel A: the flow of one request -->
+  <g id="panel-a">
+    <rect class="panel" x="40" y="120" width="880" height="344"/>
+    <rect class="badge" x="40" y="120" width="28" height="28"/>
+    <text class="h2 white mid" x="54" y="140">A</text>
+    <text class="h2" x="80" y="140">What handle() does with one request</text>
+    <text class="mono cap end" x="908" y="139">flow</text>
+    <path class="rule" d="M40 148H920"/>
+
+    <text x="56" y="227">request</text>
+    <path class="line" d="M110 222H162" marker-end="url(#arrow)"/>
+
+    <rect class="area" x="152" y="160" width="556" height="116"/>
+    <text class="mono note" x="164" y="179">bucket.allow()</text>
+    <rect class="box" x="164" y="190" width="156" height="64"/>
+    <text class="mono b mid" x="242" y="217">_refill()</text>
+    <text class="mid" x="242" y="238">adds earned tokens</text>
+    <path class="line" d="M320 222H354" marker-end="url(#arrow)"/>
+    <rect class="box" x="356" y="190" width="180" height="64"/>
+    <text class="mono b mid" x="446" y="217">tokens &gt;= cost ?</text>
+    <text class="mid" x="446" y="238">cost is 1 by default</text>
+    <path class="line-blue" d="M536 222H578" marker-end="url(#arrow-blue)"/>
+    <text class="note blue mid" x="557" y="213">yes</text>
+    <rect class="box-blue" x="580" y="190" width="116" height="64"/>
+    <text class="mid" x="638" y="217">takes</text>
+    <text class="mid" x="638" y="238">1 token</text>
+    <path class="line-blue" d="M696 222H742" marker-end="url(#arrow-blue)"/>
+    <rect class="box-blue" x="744" y="190" width="160" height="64"/>
+    <text class="mono b mid" x="824" y="217">handler(request)</text>
+    <text class="mid" x="824" y="238">request passes</text>
+
+    <path class="line-red" d="M446 254V340H488" marker-end="url(#arrow-red)"/>
+    <text class="note red" x="456" y="304">no</text>
+    <rect class="box-red" x="490" y="308" width="268" height="64"/>
+    <text class="mono b mid" x="624" y="335">retry_after()</text>
+    <text class="mono mid" x="624" y="356">(cost - tokens) / refill_rate</text>
+    <path class="line-red" d="M758 340H790" marker-end="url(#arrow-red)"/>
+    <rect class="box-red" x="792" y="308" width="112" height="64"/>
+    <text class="mid" x="848" y="335">returns 429,</text>
+    <text class="mid" x="848" y="356">Retry-After</text>
+
+    <text class="note" x="56" y="316">_refill() adds refill_rate tokens for each second</text>
+    <text class="note" x="56" y="334">since the last call. The bucket never holds</text>
+    <text class="note" x="56" y="352">more than capacity tokens.</text>
+    <text class="note" x="56" y="404">retry_after() gives the seconds until the bucket holds cost tokens. handle() puts them in the Retry-After header.</text>
+
+    <rect class="box-blue" x="56" y="434" width="24" height="12"/>
+    <text class="note" x="90" y="445">blue: the request passes</text>
+    <rect class="box-red" x="300" y="434" width="24" height="12"/>
+    <text class="note" x="334" y="445">red: the bucket rejects the request</text>
+  </g>
+
+  <!-- Panel B: the worked example -->
+  <g id="panel-b">
+    <rect class="panel" x="936" y="120" width="624" height="608"/>
+    <rect class="badge" x="936" y="120" width="28" height="28"/>
+    <text class="h2 white mid" x="950" y="140">B</text>
+    <text class="h2" x="976" y="140">Example: 8 requests each second for 10 s</text>
+    <text class="mono cap end" x="1548" y="139">tested, defaults</text>
+    <path class="rule" d="M936 148H1560"/>
+
+    <text class="note" x="952" y="180">tokens in the bucket at each full second</text>
+    <path class="rule" d="M1000 380H1520 M1000 320H1520 M1000 260H1520"/>
+    <path class="line" d="M1000 200V440H1520 M1000 440v5 M1052 440v5 M1104 440v5 M1156 440v5 M1208 440v5 M1260 440v5 M1312 440v5 M1364 440v5 M1416 440v5 M1468 440v5 M1520 440v5"/>
+    <g class="mono cap end"><text x="990" y="444">0</text><text x="990" y="384">5</text><text x="990" y="324">10</text><text x="990" y="264">15</text><text x="990" y="204">20</text></g>
+    <g class="mono cap mid"><text x="1000" y="458">0</text><text x="1052" y="458">1</text><text x="1104" y="458">2</text><text x="1156" y="458">3</text><text x="1208" y="458">4</text><text x="1260" y="458">5</text><text x="1312" y="458">6</text><text x="1364" y="458">7</text><text x="1416" y="458">8</text><text x="1468" y="458">9</text><text x="1520" y="458">10</text></g>
+    <text class="note end" x="1520" y="478">seconds</text>
+    <polyline class="line" style="stroke-width:2" points="1000,200 1052,236 1104,272 1156,308 1208,344 1260,380 1312,416 1364,428 1416,428 1468,428 1520,428"/>
+    <circle class="dot" cx="1000" cy="200" r="3.5"/><circle class="dot" cx="1052" cy="236" r="3.5"/><circle class="dot" cx="1104" cy="272" r="3.5"/><circle class="dot" cx="1156" cy="308" r="3.5"/><circle class="dot" cx="1208" cy="344" r="3.5"/><circle class="dot" cx="1260" cy="380" r="3.5"/><circle class="dot" cx="1312" cy="416" r="3.5"/><circle class="dot" cx="1364" cy="428" r="3.5"/><circle class="dot" cx="1416" cy="428" r="3.5"/><circle class="dot" cx="1468" cy="428" r="3.5"/><circle class="dot" cx="1520" cy="428" r="3.5"/>
+    <text class="note" x="1016" y="198">starts full: 20 tokens</text>
+    <text class="note" x="1190" y="300">Each second: 8 tokens out, 5 in.</text>
+    <text class="note" x="1344" y="408">under 2 tokens from 6 s</text>
+
+    <text class="note" x="952" y="500">Requests in each second:</text>
+    <rect class="band" x="952" y="508" width="592" height="24"/>
+    <path class="mark-blue" d="M954 520l3 4l7 -8"/><text class="blue" x="968" y="525">pass</text>
+    <g class="mono mid blue"><text x="1026" y="525">8</text><text x="1078" y="525">8</text><text x="1130" y="525">8</text><text x="1182" y="525">8</text><text x="1234" y="525">8</text><text x="1286" y="525">8</text><text x="1338" y="525">6</text><text x="1390" y="525">5</text><text x="1442" y="525">5</text><text x="1494" y="525">5</text></g>
+    <path class="mark-red" d="M955 540l8 8M963 540l-8 8"/><text class="red" x="968" y="549">429</text>
+    <g class="mono mid red"><text x="1026" y="549">0</text><text x="1078" y="549">0</text><text x="1130" y="549">0</text><text x="1182" y="549">0</text><text x="1234" y="549">0</text><text x="1286" y="549">0</text><text x="1338" y="549">2</text><text x="1390" y="549">3</text><text x="1442" y="549">3</text><text x="1494" y="549">3</text></g>
+    <path class="rule" d="M952 562H1544"/>
+
+    <text class="b" x="952" y="590">What the client sees</text>
+    <text x="952" y="614">Seconds 0 to 6: stored tokens pay for the 3 extra requests each second.</text>
+    <text x="952" y="636">First 429: at 6.375 s, after 51 requests passed.</text>
+    <text x="952" y="658">After that: 5 requests pass each second. That is refill_rate.</text>
+    <text x="952" y="680">If no request comes for 4 s, an empty bucket is full again.</text>
+    <text x="952" y="702">25 requests at the same instant: 20 pass, 5 get 429 with Retry-After: 0.2.</text>
+  </g>
+
+  <!-- Panel C: the values that matter -->
+  <g id="panel-c">
+    <rect class="panel" x="40" y="480" width="880" height="248"/>
+    <rect class="badge" x="40" y="480" width="28" height="28"/>
+    <text class="h2 white mid" x="54" y="500">C</text>
+    <text class="h2" x="80" y="500">The values that matter</text>
+    <text class="mono cap end" x="908" y="499">defaults</text>
+    <path class="rule" d="M40 508H920"/>
+
+    <text class="mono cap" x="56" y="534">name</text>
+    <text class="mono cap" x="200" y="534">default</text>
+    <text class="mono cap" x="300" y="534">what it does</text>
+    <path class="line" d="M56 542H904"/>
+    <rect class="band" x="56" y="543" width="848" height="30"/>
+    <text class="mono b" x="56" y="563">capacity</text><text class="mono" x="200" y="563">20</text>
+    <text x="300" y="563">The largest number of tokens in the bucket. It sets the size of the burst.</text>
+    <text class="mono b" x="56" y="593">refill_rate</text><text class="mono" x="200" y="593">5.0</text>
+    <text x="300" y="593">The tokens that the bucket earns each second. It sets the steady rate.</text>
+    <rect class="band" x="56" y="603" width="848" height="30"/>
+    <text class="mono b" x="56" y="623">cost</text><text class="mono" x="200" y="623">1</text>
+    <text x="300" y="623">The tokens that one request takes. handle() always uses the default.</text>
+    <text class="mono b" x="56" y="653">tokens</text><text class="mono" x="200" y="653">20.0</text>
+    <text x="300" y="653">The bucket starts full, so the first burst passes.</text>
+    <path class="rule" d="M56 663H904"/>
+    <text class="note" x="56" y="688">Limits: one TokenBucket is one limit for all the requests that use it. The code has no lock and no bucket for each client.</text>
+    <text class="note" x="56" y="708">Retry-After has one decimal. A wait of less than 0.05 s shows as 0.0 (tested: 0.025 s at the first 429 of panel B).</text>
+  </g>
+</svg>

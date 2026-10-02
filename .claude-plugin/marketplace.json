@@ -1,0 +1,17 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
+  "name": "demystify",
+  "description": "Explain anything as clear text, a diagram, an interactive page, or a narrated video.",
+  "owner": {
+    "name": "Daniel Yu",
+    "url": "https://github.com/C0ldSmi1e"
+  },
+  "plugins": [
+    {
+      "name": "demystify",
+      "description": "Explain anything as clear text, a diagram, an interactive page, or a narrated video. Every result is checked before you see it.",
+      "source": "./",
+      "category": "learning"
+    }
+  ]
+}

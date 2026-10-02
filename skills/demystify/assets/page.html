@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EDIT: the takeaway as a sentence</title>
+<!--
+  demystify page shell.
+
+  Copy this file. Then replace all the sample content: the texts, the picture, the steps, the
+  controls, and the model. Every sample text starts with EDIT, and the check script reports each
+  EDIT text that is left, also the texts that the script of this page writes.
+
+  Keep it one file: no external scripts, styles, fonts, or images.
+  Structure: title, answer, picture, steps, try it, limits, terms, sources.
+-->
+<style>
+  :root {
+    --bg: #fbfbfa; --card: #ffffff; --fg: #1c2430; --muted: #5b6673; --line: #d9dee5;
+    --accent: #1d4ed8; --accent-soft: #e8effd; --on-accent: #ffffff;
+    --bad: #b42318; --bad-soft: #fdecea;
+    --sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f141a; --card: #151b23; --fg: #e6eaf0; --muted: #9aa6b4; --line: #2a333e;
+      --accent: #7aa7ff; --accent-soft: #16233b; --on-accent: #0f141a;
+      --bad: #ff8a7a; --bad-soft: #3a1915;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.55 var(--sans); }
+  main { max-width: 780px; margin: 0 auto; padding: 40px 20px 64px; }
+  h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.15; margin: 8px 0 16px; letter-spacing: -0.01em; }
+  h2 { font-size: 22px; margin: 48px 0 12px; }
+  h3 { font-size: 18px; margin: 0 0 6px; }
+  p { margin: 0 0 14px; }
+  code, .mono { font-family: var(--mono); font-size: 0.92em; }
+  .kicker { color: var(--muted); font: 600 14px/1.4 var(--mono); margin: 0; }
+  .lede { font-size: 20px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+  figure { margin: 0; }
+  figcaption, .hint { color: var(--muted); font-size: 15px; margin-top: 10px; }
+  svg { display: block; width: 100%; height: auto; }
+
+  /* A wide picture keeps a readable size on a phone: the reader moves it sideways in its box. */
+  .scroll { overflow-x: auto; }
+  .scroll > svg { min-width: 620px; }
+  .scroll-hint { display: none; }
+  @media (max-width: 660px) { .scroll-hint { display: block; } }
+
+  /* Picture. The shapes take their colours from the theme. The part with .is-active is the one that the current step explains. */
+  .shape { fill: var(--card); stroke: var(--fg); stroke-width: 1.5; }
+  .wire { fill: none; stroke: var(--fg); stroke-width: 1.5; }
+  .wire-accent { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+  .wire-bad { fill: none; stroke: var(--bad); stroke-width: 1.5; }
+  .label { fill: var(--fg); font: 16px var(--sans); text-anchor: middle; }
+  .label-mono { fill: var(--fg); font: 15px var(--mono); text-anchor: middle; }
+  .small { fill: var(--muted); font: 14px var(--sans); text-anchor: middle; }
+  .fill-accent { fill: var(--accent); }
+  .fill-soft { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; }
+  .fill-bad { fill: var(--bad); }
+  .is-active .shape { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.5; }
+  .arrowhead { fill: var(--fg); }
+  .arrowhead-accent { fill: var(--accent); }
+  .arrowhead-bad { fill: var(--bad); }
+
+  /* Steps. All the steps are in one grid cell, so the box has the height of the longest step at each width. */
+  .step-list { list-style: none; margin: 0; padding: 0; display: grid; }
+  .step { grid-area: 1 / 1; }
+  .step[aria-hidden="true"] { visibility: hidden; }
+  .step-nav { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+  .step-count { color: var(--muted); font: 14px var(--mono); }
+
+  /* Controls */
+  button { font: 600 15px var(--sans); color: var(--on-accent); background: var(--accent); border: 0; border-radius: 8px; padding: 9px 16px; cursor: pointer; }
+  button.quiet { color: var(--fg); background: transparent; border: 1px solid var(--line); }
+  button:disabled { opacity: 0.45; cursor: default; }
+  button:focus-visible, input:focus-visible, .stepper:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .lab { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .control { margin-bottom: 16px; }
+  .control label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-weight: 600; }
+  .control output { font-family: var(--mono); color: var(--accent); }
+  input[type=range] { width: 100%; accent-color: var(--accent); margin: 8px 0 0; }
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; }
+  .big { font: 700 clamp(24px, 6vw, 32px)/1.15 var(--sans); margin: 0 0 10px; }
+  .big span { display: block; }
+  .good { color: var(--accent); }
+  .bad { color: var(--bad); }
+  .none { color: var(--muted); }
+  .result { border-left: 4px solid var(--accent); padding-left: 16px; min-width: 0; }
+  .result.is-bad { border-left-color: var(--bad); }
+  /* The sentence has room for three lines, so the page does not jump when the result changes. */
+  .result-text { min-height: 4.65em; margin: 0; }
+
+  ul, dl { margin: 0; padding-left: 20px; }
+  dl { padding-left: 0; }
+  dt { font-weight: 600; margin-top: 10px; }
+  dd { margin: 2px 0 0; color: var(--muted); }
+  .mark { font-weight: 600; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+  @media (max-width: 620px) { .lab { grid-template-columns: 1fr; } body { font-size: 16px; } }
+  @media (prefers-reduced-motion: no-preference) { .shape, .fill-accent, .fill-bad { transition: fill 0.2s, stroke 0.2s, width 0.25s; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="kicker">EDIT subject</p>
+    <h1>EDIT: the takeaway as a sentence</h1>
+    <p class="lede">EDIT: the answer in one short paragraph. Two or three sentences. A reader who stops here knows the main point.</p>
+  </header>
+
+  <section aria-labelledby="picture-title">
+    <h2 id="picture-title">The picture</h2>
+    <figure class="card">
+      <!--
+        Sample picture. Each part that a step explains is a <g id="part-..."> group.
+        Use the classes above, not the classes of the sheet template.
+        Keep the viewBox 720 wide and change only its height: then the smallest text (.small) is 12 px on a phone.
+        Lines and arrowheads: .wire with url(#arrow), .wire-accent with url(#arrow-accent), .wire-bad with url(#arrow-bad).
+      -->
+      <div class="scroll" id="picture-scroll">
+      <svg viewBox="0 0 720 200" role="img" aria-label="EDIT: say what the picture shows">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path class="arrowhead" d="M0 0 L10 5 L0 10 z"/>
+          </marker>
+          <marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path class="arrowhead-accent" d="M0 0 L10 5 L0 10 z"/>
+          </marker>
+          <marker id="arrow-bad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path class="arrowhead-bad" d="M0 0 L10 5 L0 10 z"/>
+          </marker>
+        </defs>
+        <g id="part-1">
+          <rect class="shape" x="20" y="50" width="160" height="80" rx="8"/>
+          <text class="label" x="100" y="96">EDIT part 1</text>
+        </g>
+        <path class="wire" d="M180 90H278" marker-end="url(#arrow)"/>
+        <text class="small" x="229" y="80">EDIT in</text>
+        <g id="part-2">
+          <rect class="shape" x="280" y="50" width="160" height="80" rx="8"/>
+          <text class="label-mono" x="360" y="96">EDIT_name()</text>
+        </g>
+        <path class="wire" d="M440 90H538" marker-end="url(#arrow)"/>
+        <text class="small" x="489" y="80">EDIT out</text>
+        <g id="part-3">
+          <rect class="shape" x="540" y="50" width="160" height="80" rx="8"/>
+          <text class="label" x="620" y="96">EDIT part 3</text>
+        </g>
+        <text class="small" x="360" y="176">EDIT: a short note under the picture, or delete this line</text>
+      </svg>
+      </div>
+      <p class="hint scroll-hint">Move the picture sideways to see all of it.</p>
+      <figcaption>EDIT: one short sentence that says what to look at.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="steps-title">
+    <h2 id="steps-title">Step by step</h2>
+    <!-- One step is visible at a time. data-part names the part of the picture that the step explains. -->
+    <div class="stepper card" id="stepper" tabindex="0" aria-label="Steps. Use the left and right arrow keys.">
+      <ol class="step-list">
+        <li class="step" data-part="part-1"><h3>EDIT step 1</h3><p>EDIT: one or two short sentences about this step.</p></li>
+        <li class="step" data-part="part-2"><h3>EDIT step 2</h3><p>EDIT: one or two short sentences about this step.</p></li>
+        <li class="step" data-part="part-3"><h3>EDIT step 3</h3><p>EDIT: one or two short sentences about this step.</p></li>
+      </ol>
+      <div class="step-nav">
+        <button type="button" class="quiet" id="prev">Back</button>
+        <button type="button" id="next">Next</button>
+        <span class="step-count" id="step-count" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="lab-title">
+    <h2 id="lab-title">Try it</h2>
+    <p>EDIT: one or two sentences that say what the model does and what it leaves out.</p>
+    <div class="lab card">
+      <div>
+        <div class="control">
+          <label for="input-a"><span>EDIT input A</span> <output id="input-a-out" for="input-a"></output></label>
+          <input id="input-a" type="range" min="1" max="40" step="1">
+        </div>
+        <div class="control">
+          <label for="input-b"><span>EDIT input B</span> <output id="input-b-out" for="input-b"></output></label>
+          <input id="input-b" type="range" min="1" max="40" step="1">
+        </div>
+        <div class="presets" role="group" aria-label="Presets">
+          <button type="button" class="quiet" data-preset="normal">EDIT normal</button>
+          <button type="button" class="quiet" data-preset="limit">EDIT limit</button>
+          <button type="button" class="quiet" data-preset="failure">EDIT failure</button>
+        </div>
+      </div>
+      <!--
+        The result is adjacent to the controls: a number, a small picture that changes, and a sentence.
+        Each of them keeps its size in every state, so the page does not jump.
+        The picture is 260 wide, which is its width on a phone. Text in it with the class .small is then 14 px.
+      -->
+      <div class="result" id="result">
+        <p class="big" id="result-number"></p>
+        <svg viewBox="0 0 260 44" role="img" aria-label="EDIT: say what this bar shows">
+          <rect class="fill-soft" x="1" y="10" width="258" height="24" rx="5"/>
+          <rect class="fill-accent" id="bar-good" x="1" y="10" width="129" height="24" rx="5"/>
+          <rect class="fill-bad" id="bar-bad" x="130" y="10" width="0" height="24"/>
+        </svg>
+        <p class="result-text" id="result-text" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="limits-title">
+    <h2 id="limits-title">Limits</h2>
+    <ul>
+      <li>EDIT: what the model leaves out.</li>
+      <li><span class="mark">Tested:</span> EDIT: a result that you got when you ran the source.</li>
+      <li><span class="mark">Inferred:</span> EDIT: a statement that you did not read in the source.</li>
+      <li><span class="mark">Not verified:</span> EDIT: a statement that you did not check.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="terms-title">
+    <h2 id="terms-title">Terms</h2>
+    <dl>
+      <dt>EDIT term</dt><dd>EDIT: its definition in one sentence.</dd>
+    </dl>
+  </section>
+
+  <footer>
+    <p>EDIT source: a file, a URL, or a commit. EDIT date.</p>
+  </footer>
+</main>
+
+<script>
+  // One state object. Each control writes to it. render() draws everything from it.
+  const DEFAULTS = { step: 0, a: 10, b: 20 };
+  const PRESETS = {
+    normal: { a: 10, b: 20 },
+    limit: { a: 20, b: 20 },
+    failure: { a: 35, b: 20 },
+  };
+  const state = Object.assign({}, DEFAULTS);
+
+  // EDIT: replace this sample with the real rule of the mechanism. Use the same names and the same
+  // default values as the source. The model only calculates: it does not read or change the page.
+  // Then the check can call it, and you can compare its results with the source:
+  //   look.py page.html --print "JSON.stringify(model({a: 35, b: 20}))"
+  function model(s) {
+    const passed = Math.min(s.a, s.b);
+    return { passed: passed, held: s.a - passed };
+  }
+
+  const $ = (id) => document.getElementById(id);
+  const steps = Array.from(document.querySelectorAll(".step"));
+
+  function render() {
+    // Steps: show one, and mark its part of the picture.
+    steps.forEach((step, index) => { step.setAttribute("aria-hidden", String(index !== state.step)); });
+    const active = steps[state.step].dataset.part;
+    document.querySelectorAll("[id^=part-]").forEach((part) => {
+      part.classList.toggle("is-active", part.id === active);
+    });
+    $("step-count").textContent = "Step " + (state.step + 1) + " of " + steps.length;
+    $("prev").disabled = state.step === 0;
+    $("next").disabled = state.step === steps.length - 1;
+
+    // Controls show the state.
+    $("input-a").value = state.a;
+    $("input-b").value = state.b;
+    $("input-a-out").textContent = state.a;
+    $("input-b-out").textContent = state.b;
+
+    // The result comes from the model: a number, the bar, and a sentence.
+    // Both lines of the number are there in every state, so the page does not jump.
+    const out = model(state);
+    const bad = out.held > 0;
+    $("result").classList.toggle("is-bad", bad);
+    $("result-number").innerHTML = '<span class="good">' + out.passed + " EDIT passed</span>" +
+      '<span class="' + (bad ? "bad" : "none") + '">' + out.held + " EDIT held</span>";
+    $("result-text").textContent = bad
+      ? "EDIT: one sentence that says why some do not pass."
+      : "EDIT: one sentence that says why all pass.";
+    const total = Math.max(1, out.passed + out.held);
+    const goodWidth = 258 * out.passed / total;
+    $("bar-good").setAttribute("width", String(goodWidth));
+    $("bar-bad").setAttribute("x", String(1 + goodWidth));
+    $("bar-bad").setAttribute("width", String(258 - goodWidth));
+  }
+
+  function go(step) {
+    state.step = Math.max(0, Math.min(steps.length - 1, step));
+    render();
+    // On a narrow screen, bring the part that the step explains into view in the picture box.
+    const box = $("picture-scroll");
+    const part = document.getElementById(steps[state.step].dataset.part);
+    if (box && part && box.scrollWidth > box.clientWidth) {
+      const picture = box.querySelector("svg").getBoundingClientRect();
+      const target = part.getBoundingClientRect();
+      box.scrollTo({ left: target.left - picture.left - (box.clientWidth - target.width) / 2, behavior: "auto" });
+    }
+  }
+
+  $("prev").addEventListener("click", () => go(state.step - 1));
+  $("next").addEventListener("click", () => go(state.step + 1));
+  $("stepper").addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight") go(state.step + 1);
+    if (event.key === "ArrowLeft") go(state.step - 1);
+  });
+  [["input-a", "a"], ["input-b", "b"]].forEach(([id, key]) => {
+    $(id).addEventListener("input", (event) => { state[key] = Number(event.target.value); render(); });
+  });
+  document.querySelectorAll("[data-preset]").forEach((button) => {
+    button.addEventListener("click", () => { Object.assign(state, PRESETS[button.dataset.preset]); render(); });
+  });
+
+  go(0);  // draws everything, and brings the part of step 1 into view in the picture box
+</script>
+</body>
+</html>

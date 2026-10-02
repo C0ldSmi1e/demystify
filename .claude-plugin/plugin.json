@@ -1,0 +1,23 @@
+{
+  "name": "demystify",
+  "displayName": "Demystify",
+  "version": "0.1.0",
+  "description": "Explain anything in the format that is easiest to understand: Simplified Technical English text, a one-sheet diagram, an interactive web page, or a narrated video. Every result is checked before you see it.",
+  "author": {
+    "name": "Daniel Yu",
+    "url": "https://github.com/C0ldSmi1e"
+  },
+  "homepage": "https://github.com/C0ldSmi1e/demystify",
+  "repository": "https://github.com/C0ldSmi1e/demystify",
+  "license": "MIT",
+  "keywords": [
+    "explainer",
+    "explain",
+    "ste100",
+    "simplified-technical-english",
+    "diagram",
+    "html",
+    "video",
+    "manim"
+  ]
+}

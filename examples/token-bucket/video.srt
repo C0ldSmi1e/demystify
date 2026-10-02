@@ -1,0 +1,96 @@
+1
+00:00:00,000 --> 00:00:03,117
+A server gets 25 requests at the same moment.
+
+2
+00:00:03,277 --> 00:00:05,827
+It answers 20 of them and rejects 5.
+
+3
+00:00:05,987 --> 00:00:06,755
+Why?
+
+4
+00:00:07,533 --> 00:00:09,390
+The code is a token bucket.
+
+5
+00:00:09,550 --> 00:00:12,100
+A token is a permit for one request.
+
+6
+00:00:12,400 --> 00:00:15,793
+The bucket holds 20 tokens at most, and it starts full.
+
+7
+00:00:16,066 --> 00:00:18,584
+For each request, the server calls allow().
+
+8
+00:00:18,744 --> 00:00:22,541
+If the bucket holds a token, allow() takes it and returns True.
+
+9
+00:00:22,833 --> 00:00:26,822
+Thus the first 20 requests of the burst take all 20 tokens.
+
+10
+00:00:27,100 --> 00:00:29,779
+The next 5 requests find an empty bucket.
+
+11
+00:00:29,939 --> 00:00:35,132
+Then allow() returns False, and the server answers 429, Too Many Requests.
+
+12
+00:00:35,400 --> 00:00:37,449
+The bucket also earns tokens.
+
+13
+00:00:37,609 --> 00:00:39,821
+It earns 5 tokens each second.
+
+14
+00:00:40,100 --> 00:00:42,117
+No timer adds these tokens.
+
+15
+00:00:42,277 --> 00:00:46,811
+At each call, the code multiplies the time since the last call by the rate.
+
+16
+00:00:47,100 --> 00:00:51,665
+Thus the empty bucket needed 0.2 seconds to earn one token.
+
+17
+00:00:51,825 --> 00:00:55,761
+The rejected reply gave this time in its Retry-After header.
+
+18
+00:00:56,033 --> 00:00:58,850
+If no request comes, the bucket fills again.
+
+19
+00:00:59,010 --> 00:01:00,953
+But it stops at 20 tokens.
+
+20
+00:01:01,733 --> 00:01:05,754
+In a test, a client sent 10 requests each second for 10 seconds.
+
+21
+00:01:05,914 --> 00:01:09,246
+The bucket allowed 69 of the 100 requests.
+
+22
+00:01:09,406 --> 00:01:13,246
+20 came from the full bucket, and the others came from the refill.
+
+23
+00:01:14,033 --> 00:01:16,373
+The capacity sets the size of a burst.
+
+24
+00:01:16,533 --> 00:01:19,435
+The refill rate sets the speed in the long term.
+

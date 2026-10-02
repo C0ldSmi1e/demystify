@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Results that the skill writes while you use it in this repository
+demystify-out/
+
+# Written by `claude plugin eval`
+evals/results/

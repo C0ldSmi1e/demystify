@@ -1,0 +1,237 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800" role="img" aria-labelledby="sheet-title"
+     font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#1c2430">
+  <title id="sheet-title">EDIT: the takeaway of this sheet in one sentence (the same sentence as the headline)</title>
+  <!--
+    demystify sheet template.
+
+    Copy this file. Then replace the headline, the footer, and all the sample content. Every sample
+    text starts with EDIT, and the check script reports each EDIT text that is left.
+
+    Canvas 1600 x 800.
+      Headline   x 48, y 68 (24 px, about 110 characters). A subject line under it at y 92.
+      Panels     A 40,120  B 552,120  C 1064,120  D 40,432  E 552,432  F 1064,432. Each is 496 x 296.
+      Footer     one line at y 764: source at the left, date in the middle, what is not verified at the right.
+    Use 2 to 6 panels. Delete the panels that you do not use and make the other panels larger.
+      A panel is five elements: the rect, the badge, the title, the caption at the right, and the rule under the title.
+      To change the width of a panel, change the width of the rect, the end of the rule, and the x of the caption.
+    For one large diagram, delete all the panels and draw in the area x 40..1560, y 120..728.
+    The check script does not read this comment.
+
+    Text: SVG does not wrap text. Break lines yourself with <tspan x="..." dy="18">.
+      Width for each character: monospace 0.6 x font size, sans-serif about 0.5 x font size.
+      Sizes: headline 24 (h1), panel title 16 (h2), labels 14 (the default), notes and captions 12 (note, cap).
+    Colour: ink, grey, plus blue and red. Give blue and red one meaning each in the whole sheet.
+      Grey classes (band, area, bar-grey) have no meaning: use them for structure.
+    A shape without a class needs fill="none" or its own fill. The svg element sets the ink colour as the default fill.
+  -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1c2430"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#b42318"/>
+    </marker>
+    <style>
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+      .h1 { font-size: 24px; font-weight: 700; }
+      .h2 { font-size: 16px; font-weight: 600; }
+      .b { font-weight: 600; }
+      .note { font-size: 12px; fill: #5f6b7a; }
+      .cap { font-size: 12px; fill: #5f6b7a; }
+      .blue { fill: #1d4ed8; }
+      .red { fill: #b42318; }
+      .white { fill: #ffffff; }
+      .mid { text-anchor: middle; }
+      .end { text-anchor: end; }
+      .paper { fill: #ffffff; }
+      .frame { fill: none; stroke: #1c2430; stroke-width: 1.2; }
+      .panel { fill: #ffffff; stroke: #c5ccd6; stroke-width: 1; }
+      .badge { fill: #1c2430; }
+      .box { fill: #ffffff; stroke: #1c2430; stroke-width: 1.2; }
+      .box-blue { fill: #eef3fb; stroke: #1d4ed8; stroke-width: 1.2; }
+      .box-red { fill: #fdf0ee; stroke: #b42318; stroke-width: 1.2; }
+      .area { fill: #f3f5f8; stroke: #c5ccd6; stroke-width: 1; }
+      .band { fill: #f3f5f8; }
+      .track { fill: #eef1f5; }
+      .bar { fill: #cfe0fb; stroke: #1d4ed8; stroke-width: 1; }
+      .bar-grey { fill: #c5ccd6; stroke: #5f6b7a; stroke-width: 1; }
+      .rule { fill: none; stroke: #c5ccd6; stroke-width: 1; }
+      .line { fill: none; stroke: #1c2430; stroke-width: 1.4; }
+      .line-blue { fill: none; stroke: #1d4ed8; stroke-width: 1.4; }
+      .line-red { fill: none; stroke: #b42318; stroke-width: 1.4; }
+      .mark-blue { fill: none; stroke: #1d4ed8; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .mark-red { fill: none; stroke: #b42318; stroke-width: 2; stroke-linecap: round; }
+      .dot { fill: #ffffff; stroke: #1c2430; stroke-width: 1.4; }
+    </style>
+  </defs>
+
+  <!-- Sheet: paper, frame, headline, footer. Keep this part. -->
+  <rect class="paper" width="1600" height="800"/>
+  <rect class="frame" x="24" y="24" width="1552" height="752"/>
+  <text class="h1" x="48" y="68">EDIT: the takeaway of this sheet in one sentence</text>
+  <text class="note" x="48" y="92">EDIT: the subject, in a few words</text>
+  <path class="line" d="M24 104H1576"/>
+  <path class="rule" d="M24 744H1576"/>
+  <text class="note" x="48" y="764">EDIT source: a file, a URL, or a commit</text>
+  <text class="note mid" x="800" y="764">EDIT date: 2026-01-01</text>
+  <text class="note end" x="1552" y="764">EDIT not verified: what you did not check, or "nothing"</text>
+
+  <!-- Panel A: a flow. Boxes left to right, a label next to each arrow, the failure path in red. -->
+  <g id="panel-a">
+    <rect class="panel" x="40" y="120" width="496" height="296"/>
+    <rect class="badge" x="40" y="120" width="28" height="28"/>
+    <text class="h2 white mid" x="54" y="140">A</text>
+    <text class="h2" x="80" y="140">EDIT a flow</text>
+    <text class="mono cap end" x="524" y="139">EDIT kind</text>
+    <path class="rule" d="M40 148H536"/>
+
+    <rect class="box" x="56" y="176" width="112" height="56"/>
+    <text class="mid" x="112" y="209">EDIT part 1</text>
+    <rect class="box-blue" x="232" y="176" width="112" height="56"/>
+    <text class="mid" x="288" y="209">EDIT part 2</text>
+    <rect class="box" x="408" y="176" width="112" height="56"/>
+    <text class="mid" x="464" y="209">EDIT part 3</text>
+    <path class="line" d="M168 204H230" marker-end="url(#arrow)"/>
+    <text class="note mid" x="200" y="196">EDIT in</text>
+    <path class="line-blue" d="M344 204H406" marker-end="url(#arrow-blue)"/>
+    <text class="note mid blue" x="376" y="196">EDIT ok</text>
+
+    <path class="line-red" d="M288 232V282" marker-end="url(#arrow-red)"/>
+    <text class="note red" x="298" y="262">EDIT failure</text>
+    <rect class="box-red" x="198" y="284" width="180" height="44"/>
+    <text class="mid" x="288" y="311">EDIT failure result</text>
+
+    <!-- A key: one swatch and one line for each colour that has a meaning. -->
+    <rect class="box-blue" x="56" y="366" width="24" height="12"/>
+    <text class="note" x="90" y="377">EDIT blue: the normal path</text>
+    <rect class="box-red" x="56" y="386" width="24" height="12"/>
+    <text class="note" x="90" y="397">EDIT red: the failure path</text>
+  </g>
+
+  <!-- Panel B: one real example with its parts named. Brackets go under the text, labels under the brackets. -->
+  <g id="panel-b">
+    <rect class="panel" x="552" y="120" width="496" height="296"/>
+    <rect class="badge" x="552" y="120" width="28" height="28"/>
+    <text class="h2 white mid" x="566" y="140">B</text>
+    <text class="h2" x="592" y="140">EDIT an annotated example</text>
+    <text class="mono cap end" x="1036" y="139">EDIT kind</text>
+    <path class="rule" d="M552 148H1048"/>
+
+    <text class="note" x="568" y="170">EDIT 1: a real line from the source</text>
+    <text class="mono" x="568" y="198" style="font-size:15px">EDIT_call(value=19)</text>
+    <path class="line-blue" d="M568 206v6H649v-6"/>
+    <text class="note blue mid" x="608" y="228">EDIT name</text>
+    <path class="line-blue" d="M712 206v6H730v-6"/>
+    <text class="note blue mid" x="721" y="228">EDIT value</text>
+
+    <path class="rule" d="M568 252H1032"/>
+    <text class="note" x="568" y="278">EDIT 2: the line for the failure case</text>
+    <text class="mono" x="568" y="306" style="font-size:15px">EDIT_error(after=2)</text>
+    <path class="line-red" d="M721 314v6H730v-6"/>
+    <text class="note red mid" x="725" y="336">EDIT unit</text>
+
+    <text class="note" x="568" y="376">EDIT: one monospace character is 0.6 x the font size wide.</text>
+    <text class="note" x="568" y="394">EDIT: calculate where a bracket starts and ends.</text>
+  </g>
+
+  <!-- Panel C: a table with a result mark in each row. A mark and a word, so that colour is not the only signal. -->
+  <g id="panel-c">
+    <rect class="panel" x="1064" y="120" width="496" height="296"/>
+    <rect class="badge" x="1064" y="120" width="28" height="28"/>
+    <text class="h2 white mid" x="1078" y="140">C</text>
+    <text class="h2" x="1104" y="140">EDIT cases and results</text>
+    <text class="mono cap end" x="1548" y="139">EDIT kind</text>
+    <path class="rule" d="M1064 148H1560"/>
+
+    <text class="mono cap" x="1080" y="178">EDIT case</text>
+    <text class="mono cap" x="1250" y="178">EDIT value</text>
+    <text class="mono cap" x="1410" y="178">EDIT result</text>
+    <path class="line" d="M1080 186H1544"/>
+    <rect class="band" x="1080" y="187" width="464" height="30"/>
+    <text x="1080" y="207">EDIT row 1</text>
+    <text class="mono" x="1250" y="207">20</text>
+    <path class="mark-blue" d="M1410 202l4 4l8 -9"/><text class="blue" x="1430" y="207">EDIT ok</text>
+    <text x="1080" y="237">EDIT row 2</text>
+    <text class="mono" x="1250" y="237">20</text>
+    <path class="mark-blue" d="M1410 232l4 4l8 -9"/><text class="blue" x="1430" y="237">EDIT ok</text>
+    <rect class="band" x="1080" y="247" width="464" height="30"/>
+    <text x="1080" y="267">EDIT row 3</text>
+    <text class="mono" x="1250" y="267">0</text>
+    <path class="mark-red" d="M1411 257l9 9M1420 257l-9 9"/><text class="red" x="1430" y="267">EDIT fails</text>
+    <text x="1080" y="297">EDIT row 4</text>
+    <text class="mono" x="1250" y="297">5</text>
+    <path class="mark-blue" d="M1410 292l4 4l8 -9"/><text class="blue" x="1430" y="297">EDIT ok</text>
+    <path class="rule" d="M1080 307H1544"/>
+
+    <text class="note" x="1080" y="394">EDIT: a mark and a word in each row.</text>
+  </g>
+
+  <!-- Panel D: a comparison. Criteria down the side, options across the top. -->
+  <g id="panel-d">
+    <rect class="panel" x="40" y="432" width="496" height="296"/>
+    <rect class="badge" x="40" y="432" width="28" height="28"/>
+    <text class="h2 white mid" x="54" y="452">D</text>
+    <text class="h2" x="80" y="452">EDIT a comparison</text>
+    <text class="mono cap end" x="524" y="451">EDIT kind</text>
+    <path class="rule" d="M40 460H536"/>
+
+    <text class="mono cap" x="216" y="490">EDIT option A</text>
+    <text class="mono cap" x="376" y="490">EDIT option B</text>
+    <path class="line" d="M56 498H520"/>
+    <rect class="band" x="56" y="499" width="464" height="30"/>
+    <text class="b" x="56" y="519">EDIT criterion 1</text><text x="216" y="519">EDIT</text><text x="376" y="519">EDIT</text>
+    <text class="b" x="56" y="549">EDIT criterion 2</text><text x="216" y="549">EDIT</text><text x="376" y="549">EDIT</text>
+    <rect class="band" x="56" y="559" width="464" height="30"/>
+    <text class="b" x="56" y="579">EDIT criterion 3</text><text x="216" y="579">EDIT</text><text class="red" x="376" y="579">EDIT</text>
+    <path class="rule" d="M56 589H520"/>
+
+    <text class="note" x="56" y="706">EDIT: the same criteria for each option, in the same sequence.</text>
+  </g>
+
+  <!-- Panel E: quantities on one scale. A track, a bar, the value at the right, the unit in the caption. -->
+  <g id="panel-e">
+    <rect class="panel" x="552" y="432" width="496" height="296"/>
+    <rect class="badge" x="552" y="432" width="28" height="28"/>
+    <text class="h2 white mid" x="566" y="452">E</text>
+    <text class="h2" x="592" y="452">EDIT quantities</text>
+    <text class="mono cap end" x="1036" y="451">EDIT unit, 0 to 20</text>
+    <path class="rule" d="M552 460H1048"/>
+
+    <text x="568" y="494">EDIT quantity 1</text><text class="mono end" x="1032" y="494">20</text>
+    <rect class="track" x="568" y="502" width="464" height="12"/><rect class="bar-grey" x="568" y="502" width="464" height="12"/>
+    <text x="568" y="548">EDIT quantity 2</text><text class="mono end" x="1032" y="548">5</text>
+    <rect class="track" x="568" y="556" width="464" height="12"/><rect class="bar-grey" x="568" y="556" width="116" height="12"/>
+    <text x="568" y="602">EDIT quantity 3</text><text class="mono end" x="1032" y="602">1</text>
+    <rect class="track" x="568" y="610" width="464" height="12"/><rect class="bar-grey" x="568" y="610" width="23" height="12"/>
+    <path class="rule" d="M568 628v6 M684 628v6 M800 628v6 M916 628v6 M1032 628v6"/>
+    <g class="mono cap mid"><text x="568" y="650">0</text><text x="684" y="650">5</text><text x="800" y="650">10</text><text x="916" y="650">15</text><text x="1032" y="650">20</text></g>
+
+    <text class="note" x="568" y="706">EDIT: one scale for all the bars.</text>
+  </g>
+
+  <!-- Panel F: a timeline. Dates above the line, events below it. -->
+  <g id="panel-f">
+    <rect class="panel" x="1064" y="432" width="496" height="296"/>
+    <rect class="badge" x="1064" y="432" width="28" height="28"/>
+    <text class="h2 white mid" x="1078" y="452">F</text>
+    <text class="h2" x="1104" y="452">EDIT a timeline</text>
+    <text class="mono cap end" x="1548" y="451">EDIT unit</text>
+    <path class="rule" d="M1064 460H1560"/>
+
+    <path class="line" d="M1108 540H1518"/>
+    <circle class="dot" cx="1112" cy="540" r="5"/><circle class="dot" cx="1246" cy="540" r="5"/>
+    <circle class="dot" cx="1380" cy="540" r="5"/><circle class="dot" cx="1514" cy="540" r="5"/>
+    <g class="mid">
+      <text x="1112" y="524">EDIT t1</text><text x="1246" y="524">EDIT t2</text><text x="1380" y="524">EDIT t3</text><text x="1514" y="524">EDIT t4</text>
+    </g>
+    <g class="note mid">
+      <text x="1112" y="562">EDIT event 1</text><text x="1246" y="562">EDIT event 2</text>
+      <text x="1380" y="562">EDIT event 3</text><text x="1514" y="562">EDIT event 4</text>
+    </g>
+
+    <text class="note" x="1080" y="706">EDIT: dates above the line, events below it.</text>
+  </g>
+</svg>

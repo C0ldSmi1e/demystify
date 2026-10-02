@@ -1,0 +1,605 @@
+{
+  "date": "2026-10-02",
+  "claude_version": "2.1.287 (Claude Code)",
+  "model": "claude-sonnet-5-5",
+  "runs_for_each_arm": 3,
+  "without_a_shell": {
+    "command": "claude plugin eval . --runs 3 --model claude-sonnet-5-5 --keep-temp --json results.json --allow-tools Write Edit",
+    "cost_usd": 3.19,
+    "note": "The text case ran again after the last change to references/text.md. Its numbers are from that run.",
+    "cases": {
+      "diagram-from-code": {
+        "with": [
+          {
+            "score": 1,
+            "turns": 9,
+            "cost_usd": 0.237,
+            "skill_loaded": true,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 8889,
+            "words": 269,
+            "says_what_was_checked": true,
+            "worked_example": true
+          },
+          {
+            "score": 1,
+            "turns": 9,
+            "cost_usd": 0.327,
+            "skill_loaded": true,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 10687,
+            "words": 340,
+            "says_what_was_checked": true,
+            "worked_example": true
+          },
+          {
+            "score": 1,
+            "turns": 7,
+            "cost_usd": 0.345,
+            "skill_loaded": true,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 11698,
+            "words": 349,
+            "says_what_was_checked": true,
+            "worked_example": true
+          }
+        ],
+        "without": [
+          {
+            "score": 0.6,
+            "turns": 2,
+            "cost_usd": 0.077,
+            "skill_loaded": false,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 3,
+            "error_rules": {},
+            "warning_rules": [
+              "tiny-text"
+            ],
+            "bytes": 5475,
+            "words": 81,
+            "says_what_was_checked": false,
+            "worked_example": false
+          },
+          {
+            "score": 0.6,
+            "turns": 2,
+            "cost_usd": 0.071,
+            "skill_loaded": false,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 4245,
+            "words": 76,
+            "says_what_was_checked": false,
+            "worked_example": false
+          },
+          {
+            "score": 1,
+            "turns": 2,
+            "cost_usd": 0.07,
+            "skill_loaded": false,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 3914,
+            "words": 64,
+            "says_what_was_checked": false,
+            "worked_example": false
+          }
+        ]
+      },
+      "leaves-other-work-alone": {
+        "with": [
+          {
+            "score": 1,
+            "turns": 1,
+            "cost_usd": 0.024,
+            "skill_loaded": false
+          },
+          {
+            "score": 1,
+            "turns": 1,
+            "cost_usd": 0.025,
+            "skill_loaded": false
+          },
+          {
+            "score": 1,
+            "turns": 1,
+            "cost_usd": 0.024,
+            "skill_loaded": false
+          }
+        ],
+        "without": [
+          {
+            "score": 1,
+            "turns": 1,
+            "cost_usd": 0.024,
+            "skill_loaded": false
+          },
+          {
+            "score": 1,
+            "turns": 1,
+            "cost_usd": 0.024,
+            "skill_loaded": false
+          },
+          {
+            "score": 1,
+            "turns": 1,
+            "cost_usd": 0.024,
+            "skill_loaded": false
+          }
+        ]
+      },
+      "page-from-code": {
+        "with": [
+          {
+            "score": 1,
+            "turns": 11,
+            "cost_usd": 0.393,
+            "skill_loaded": true,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 3,
+            "error_rules": {},
+            "warning_rules": [
+              "page-jumps"
+            ],
+            "bytes": 19444,
+            "words": 505,
+            "says_what_was_checked": true
+          },
+          {
+            "score": 1,
+            "turns": 9,
+            "cost_usd": 0.291,
+            "skill_loaded": true,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 3,
+            "error_rules": {},
+            "warning_rules": [
+              "page-jumps"
+            ],
+            "bytes": 18863,
+            "words": 464,
+            "says_what_was_checked": true
+          },
+          {
+            "score": 1,
+            "turns": 12,
+            "cost_usd": 0.305,
+            "skill_loaded": true,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 18244,
+            "words": 487,
+            "says_what_was_checked": true
+          }
+        ],
+        "without": [
+          {
+            "score": 1,
+            "turns": 5,
+            "cost_usd": 0.212,
+            "skill_loaded": false,
+            "rendered": true,
+            "errors": 1,
+            "warnings": 12,
+            "error_rules": {
+              "text-outside-canvas": 1
+            },
+            "warning_rules": [
+              "low-contrast",
+              "page-jumps",
+              "tiny-text"
+            ],
+            "bytes": 18423,
+            "words": 323,
+            "says_what_was_checked": false
+          },
+          {
+            "score": 1,
+            "turns": 5,
+            "cost_usd": 0.15,
+            "skill_loaded": false,
+            "rendered": true,
+            "errors": 1,
+            "warnings": 10,
+            "error_rules": {
+              "text-outside-canvas": 1
+            },
+            "warning_rules": [
+              "page-jumps",
+              "tiny-text"
+            ],
+            "bytes": 12150,
+            "words": 268,
+            "says_what_was_checked": false
+          },
+          {
+            "score": 1,
+            "turns": 5,
+            "cost_usd": 0.221,
+            "skill_loaded": false,
+            "rendered": true,
+            "errors": 1,
+            "warnings": 19,
+            "error_rules": {
+              "horizontal-overflow": 1
+            },
+            "warning_rules": [
+              "low-contrast",
+              "page-jumps",
+              "tiny-text"
+            ],
+            "bytes": 18708,
+            "words": 274,
+            "says_what_was_checked": false
+          }
+        ]
+      },
+      "text-explains-code": {
+        "with": [
+          {
+            "score": 1,
+            "turns": 4,
+            "cost_usd": 0.078,
+            "skill_loaded": true,
+            "passes_check": true,
+            "sentences": 47,
+            "mean_words": 9.0,
+            "longest_sentence": 20,
+            "over_limit": 0,
+            "words": 421,
+            "headings": 0,
+            "answer_in_first_line": true
+          },
+          {
+            "score": 1,
+            "turns": 4,
+            "cost_usd": 0.076,
+            "skill_loaded": true,
+            "passes_check": false,
+            "sentences": 41,
+            "mean_words": 9.3,
+            "longest_sentence": 25,
+            "over_limit": 0,
+            "words": 382,
+            "headings": 0,
+            "answer_in_first_line": true
+          },
+          {
+            "score": 1,
+            "turns": 4,
+            "cost_usd": 0.074,
+            "skill_loaded": true,
+            "passes_check": true,
+            "sentences": 39,
+            "mean_words": 8.9,
+            "longest_sentence": 21,
+            "over_limit": 0,
+            "words": 348,
+            "headings": 0,
+            "answer_in_first_line": true
+          }
+        ],
+        "without": [
+          {
+            "score": 1,
+            "turns": 1,
+            "cost_usd": 0.037,
+            "skill_loaded": false,
+            "passes_check": true,
+            "sentences": 45,
+            "mean_words": 8.0,
+            "longest_sentence": 16,
+            "over_limit": 0,
+            "words": 359,
+            "headings": 8,
+            "answer_in_first_line": false
+          },
+          {
+            "score": 1,
+            "turns": 1,
+            "cost_usd": 0.038,
+            "skill_loaded": false,
+            "passes_check": true,
+            "sentences": 54,
+            "mean_words": 6.9,
+            "longest_sentence": 14,
+            "over_limit": 0,
+            "words": 373,
+            "headings": 8,
+            "answer_in_first_line": false
+          },
+          {
+            "score": 1,
+            "turns": 1,
+            "cost_usd": 0.037,
+            "skill_loaded": false,
+            "passes_check": true,
+            "sentences": 48,
+            "mean_words": 7.4,
+            "longest_sentence": 14,
+            "over_limit": 0,
+            "words": 356,
+            "headings": 7,
+            "answer_in_first_line": false
+          }
+        ]
+      }
+    }
+  },
+  "with_a_shell": {
+    "command": "python3 evals/with_shell.py --runs 3 --model claude-sonnet-5-5",
+    "cost_usd": 2.56,
+    "cases": {
+      "diagram-from-code": {
+        "with": [
+          {
+            "case": "diagram-from-code",
+            "arm": "with",
+            "run": 1,
+            "skill_loaded": true,
+            "ran_look": 2,
+            "cost_usd": 0.257,
+            "turns": 11,
+            "seconds": 67,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 10885,
+            "words": 365,
+            "says_what_was_checked": true,
+            "worked_example": true
+          },
+          {
+            "case": "diagram-from-code",
+            "arm": "with",
+            "run": 2,
+            "skill_loaded": true,
+            "ran_look": 1,
+            "cost_usd": 0.258,
+            "turns": 12,
+            "seconds": 63,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 8461,
+            "words": 280,
+            "says_what_was_checked": true,
+            "worked_example": true
+          },
+          {
+            "case": "diagram-from-code",
+            "arm": "with",
+            "run": 3,
+            "skill_loaded": true,
+            "ran_look": 1,
+            "cost_usd": 0.266,
+            "turns": 10,
+            "seconds": 77,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 7642,
+            "words": 289,
+            "says_what_was_checked": true,
+            "worked_example": true
+          }
+        ],
+        "without": [
+          {
+            "case": "diagram-from-code",
+            "arm": "without",
+            "run": 1,
+            "skill_loaded": false,
+            "ran_look": 0,
+            "cost_usd": 0.08,
+            "turns": 2,
+            "seconds": 18,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 3842,
+            "words": 74,
+            "says_what_was_checked": false,
+            "worked_example": false
+          },
+          {
+            "case": "diagram-from-code",
+            "arm": "without",
+            "run": 2,
+            "skill_loaded": false,
+            "ran_look": 0,
+            "cost_usd": 0.074,
+            "turns": 2,
+            "seconds": 16,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 3988,
+            "words": 60,
+            "says_what_was_checked": false,
+            "worked_example": false
+          },
+          {
+            "case": "diagram-from-code",
+            "arm": "without",
+            "run": 3,
+            "skill_loaded": false,
+            "ran_look": 0,
+            "cost_usd": 0.094,
+            "turns": 2,
+            "seconds": 25,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 4918,
+            "words": 74,
+            "says_what_was_checked": false,
+            "worked_example": false
+          }
+        ]
+      },
+      "page-from-code": {
+        "with": [
+          {
+            "case": "page-from-code",
+            "arm": "with",
+            "run": 1,
+            "skill_loaded": true,
+            "ran_look": 2,
+            "cost_usd": 0.384,
+            "turns": 12,
+            "seconds": 112,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 19763,
+            "words": 505,
+            "says_what_was_checked": true
+          },
+          {
+            "case": "page-from-code",
+            "arm": "with",
+            "run": 2,
+            "skill_loaded": true,
+            "ran_look": 1,
+            "cost_usd": 0.287,
+            "turns": 9,
+            "seconds": 73,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 19087,
+            "words": 478,
+            "says_what_was_checked": true
+          },
+          {
+            "case": "page-from-code",
+            "arm": "with",
+            "run": 3,
+            "skill_loaded": true,
+            "ran_look": 3,
+            "cost_usd": 0.472,
+            "turns": 16,
+            "seconds": 158,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 0,
+            "error_rules": {},
+            "warning_rules": [],
+            "bytes": 20560,
+            "words": 553,
+            "says_what_was_checked": true
+          }
+        ],
+        "without": [
+          {
+            "case": "page-from-code",
+            "arm": "without",
+            "run": 1,
+            "skill_loaded": false,
+            "ran_look": 0,
+            "cost_usd": 0.13,
+            "turns": 2,
+            "seconds": 41,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 14,
+            "error_rules": {},
+            "warning_rules": [
+              "page-jumps",
+              "tiny-text"
+            ],
+            "bytes": 11203,
+            "words": 188,
+            "says_what_was_checked": false
+          },
+          {
+            "case": "page-from-code",
+            "arm": "without",
+            "run": 2,
+            "skill_loaded": false,
+            "ran_look": 0,
+            "cost_usd": 0.131,
+            "turns": 2,
+            "seconds": 41,
+            "rendered": true,
+            "errors": 1,
+            "warnings": 12,
+            "error_rules": {
+              "text-overlap": 1
+            },
+            "warning_rules": [
+              "page-jumps",
+              "tiny-text"
+            ],
+            "bytes": 11495,
+            "words": 276,
+            "says_what_was_checked": false
+          },
+          {
+            "case": "page-from-code",
+            "arm": "without",
+            "run": 3,
+            "skill_loaded": false,
+            "ran_look": 0,
+            "cost_usd": 0.126,
+            "turns": 2,
+            "seconds": 39,
+            "rendered": true,
+            "errors": 0,
+            "warnings": 13,
+            "error_rules": {},
+            "warning_rules": [
+              "page-jumps",
+              "tiny-text"
+            ],
+            "bytes": 10735,
+            "words": 228,
+            "says_what_was_checked": false
+          }
+        ]
+      }
+    }
+  }
+}
